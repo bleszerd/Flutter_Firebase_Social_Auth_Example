@@ -24,7 +24,9 @@ class Homepage extends StatelessWidget {
             GoogleAuthButtonWidget(onTap: () {
               print(authController.user.toString());
             }),
-            GoogleAuthButtonWidget(onTap: () {}),
+            GoogleAuthButtonWidget(onTap: () {
+              homepageController.facebookSignIn();
+            }),
           ],
         ),
       ),

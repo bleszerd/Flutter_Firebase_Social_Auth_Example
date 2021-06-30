@@ -1,6 +1,7 @@
 import 'package:firebase_social_auth_test/models/user_model.dart';
 import 'package:firebase_social_auth_test/shared/auth/auth_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class HomePageController {
@@ -21,6 +22,17 @@ class HomePageController {
     } catch (error) {
       authController.setUser(context, null);
       print(error.toString());
+    }
+  }
+
+  Future<void> facebookSignIn() async {
+    try {
+      var result = await FacebookAuth.instance
+          .login(permissions: ['email', 'public_profile']);
+      var userData = await FacebookAuth.instance.getUserData();
+      print(userData["name"]);
+    } catch (error) {
+      print("ERRORA: $error");
     }
   }
 }
