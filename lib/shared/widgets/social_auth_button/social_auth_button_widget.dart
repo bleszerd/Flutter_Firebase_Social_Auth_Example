@@ -1,5 +1,6 @@
-import 'package:firebase_social_auth_test/shared/widgets/google_auth_button/social_auth_button_controller.dart';
 import 'package:flutter/material.dart';
+
+import 'social_auth_button_controller.dart';
 
 class SocialAuthButtonWidget extends StatelessWidget {
   final VoidCallback onTap;
