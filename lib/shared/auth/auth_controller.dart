@@ -7,9 +7,9 @@ class AuthController {
 
   UserModel get user => _user!;
 
-  void setUser(BuildContext context, UserModel? user) {
+  Future<void> setUser(BuildContext context, UserModel? user) async {
     if (user != null) {
-      saveUser(user);
+      await saveUser(user);
       _user = user;
       print("Okay");
     } else {
@@ -20,7 +20,6 @@ class AuthController {
   Future<void> saveUser(UserModel user) async {
     final instance = await SharedPreferences.getInstance();
     await instance.setString("user", user.toJson());
-    return;
   }
 
   Future<void> fetchUserFromData(BuildContext context) async {
@@ -28,7 +27,6 @@ class AuthController {
     if (instance.containsKey("user")) {
       final json = instance.get("user") as String;
       setUser(context, UserModel.fromJson(json));
-      return;
     } else {
       setUser(context, null);
     }

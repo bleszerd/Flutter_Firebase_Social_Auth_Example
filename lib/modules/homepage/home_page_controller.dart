@@ -21,18 +21,25 @@ class HomePageController {
       authController.setUser(context, user);
     } catch (error) {
       authController.setUser(context, null);
-      print(error.toString());
+      print(error);
     }
   }
 
-  Future<void> facebookSignIn() async {
+  Future<void> facebookSignIn(BuildContext context) async {
     try {
       var result = await FacebookAuth.instance
           .login(permissions: ['email', 'public_profile']);
       var userData = await FacebookAuth.instance.getUserData();
-      print(userData["name"]);
+      UserModel user = UserModel(
+        name: userData["name"],
+        email: userData["email"],
+        id: userData["id"],
+        photo: userData["picture"]["data"]["url"],
+      );
+      await authController.setUser(context, user);
     } catch (error) {
-      print("ERRORA: $error");
+      authController.setUser(context, null);
+      print(error);
     }
   }
 }
